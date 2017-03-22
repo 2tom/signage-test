@@ -26,10 +26,7 @@ RUN git clone https://github.com/creationix/nvm.git $HOME/.nvm\
  && git checkout $NVM_VERS
 
 RUN bash -c '. $HOME/.nvm/nvm.sh; nvm install $NODE_VERS && nvm alias default $NODE_VERS'
-RUN bash -c '. $HOME/.nvm/nvm.sh; nvm use stable
-
-RUN mkdir -p $HOME/.vim/bundle\
- && git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle
+RUN bash -c '. $HOME/.nvm/nvm.sh; nvm use stable'
 
 VOLUME /src
 
