@@ -13,7 +13,6 @@ const Koa = require("koa");
 const Pug = require("koa-pug");
 const Router = require("koa-router");
 const serve = require("koa-static");
-const moment = require("moment");
 const app = new Koa();
 /**
  * router
@@ -27,7 +26,8 @@ app.use(router.allowedMethods());
 const pug = new Pug({
     app: app,
     viewPath: "./dist/views",
-    basedir: "./dist/views"
+    basedir: "./dist/views",
+    pretty: true
 });
 /**
  * public pass
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
         count += 1;
         let rand = Math.floor(Math.random() * 4);
         let num = count % rand;
-        let now = moment().format("YYYY/MM/DD HH:mm:ss");
+        let now = new Date();
         socket.emit("new_message", {
             label: count,
             flag: num,

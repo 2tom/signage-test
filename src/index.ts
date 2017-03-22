@@ -7,7 +7,6 @@ import * as Koa from "koa";
 import * as Pug from "koa-pug";
 import * as Router from "koa-router";
 import * as serve from "koa-static";
-import * as moment from 'moment';
 
 const app = new Koa();
 
@@ -24,7 +23,8 @@ app.use(router.allowedMethods());
 const pug = new Pug({
     app: app,
     viewPath: "./dist/views",
-    basedir: "./dist/views"
+    basedir: "./dist/views",
+    pretty: true
 });
 
 /**
@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
         count += 1;
         let rand = Math.floor( Math.random() * 4 );
         let num = count % rand;
-        let now = moment().format("YYYY/MM/DD HH:mm:ss");
+        let now = new Date();
         socket.emit("new_message", {
             label: count,
             flag: num,
